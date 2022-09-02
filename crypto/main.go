@@ -42,10 +42,8 @@ func getCoinDetails(url string) coinDetails {
 		fmt.Println(err)
 	}
 	res, _ := http.DefaultClient.Do(req)
-
 	defer res.Body.Close()
 	body, _ := ioutil.ReadAll(res.Body)
-
 	var coinDetailsRegex = regexp.MustCompile(`(?m)<div\s*class="sc-16r8icm-0\s*gpRPnR\s*nameHeader"><img\s*src="(.*?)".*?/><h2\s*class="sc-1q9q90x-0\s*.*?\s*h1"\s*color="text">(.*?)<small\s*class="nameSymbol">(.*?)<\/small>.*?namePill\s*namePillPrimary">Rank\s*#([0-9]*).*?priceValue.*?<span>(.*?)</span>.*?n78udj-5\s*dBJPYV"><span>(.*?)</span>.*?n78udj-5\s*dBJPYV"><span>(.*?)<\/span>.*?statsValue">(.*?)</div>.*?statsValue">(.*?)</div>.*?statsValue">(.*?)</div>.*?statsValue">(.*?)</div>.*?statsValue">(.*?)</div>.*?link-button.*?href="(.*?)"`)
 
 	match := coinDetailsRegex.FindAllStringSubmatch(string(body), -1)

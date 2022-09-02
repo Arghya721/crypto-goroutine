@@ -17,7 +17,7 @@ jobs:
         go-version: ${{ matrix.go-version }}
      - name: Build binary
        run: |
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/crypto crypto/main.go && zip publish.zip bin/crypto
+          env GOARCH=amd64 GOOS=linux go build -ldflags="-s -w" -o bin/crypto crypto/main.go && zip deployment.zip main
      - name: default deploy
        uses: appleboy/lambda-action@master
        with:
@@ -25,7 +25,16 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: crypto-goroutine-dev-crypto
+          zip_file: deployment.zip
           source: bin/crypto
+          memory_size: 1024
+          timeout: 10
+          handler: main
+          runtime: go1.x
+          
+          
+
+
 
           
 
