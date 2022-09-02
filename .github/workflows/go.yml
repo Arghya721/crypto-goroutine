@@ -25,6 +25,8 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: crypto-goroutine-dev-crypto
+          source: crypto/main.go
+
           
 
 
