@@ -30,6 +30,11 @@ jobs:
           memory_size: 128
           timeout: 10
           runtime: nodejs12.x
+     - run: aws lambda update-function-code --function-name=crypto-goroutine-dev-crypto --zip-file=fileb://crypto/deployment.zip
+
+
+
+
 
 
 
