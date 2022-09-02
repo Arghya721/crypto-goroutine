@@ -156,7 +156,6 @@ func Handler(ctx context.Context) (Response, error) {
 			"X-MyCompany-Func-Reply": "hello-handler",
 		},
 	}
-
 	return resp, nil
 }
 
