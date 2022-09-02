@@ -17,7 +17,8 @@ jobs:
         go-version: ${{ matrix.go-version }}
      - name: Build binary
        run: |
-          CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o bin/crypto crypto/main.go && zip publish.zip bin/crypto
+          cd crypto && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -v -a -o main main.go && zip deployment.zip main
+
      - name: default deploy
        uses: appleboy/lambda-action@master
        with:
@@ -25,7 +26,26 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ${{ secrets.AWS_REGION }}
           function_name: crypto-goroutine-dev-crypto
-          source: index.js
+          zip_file: crypto/deployment.zip
+          memory_size: 128
+          timeout: 10
+          runtime: nodejs12.x
+
+  deploy_source:
+    name: deploy lambda from source
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout source code
+        uses: actions/checkout@v1
+      - name: default deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: ${{ secrets.AWS_REGION }}
+          function_name: crypto-goroutine-dev-crypto
+          source: crypto/index.js
+
 
           
 
