@@ -28,7 +28,6 @@ type coinDetails struct {
 	MarketCap             string            `json:"market_cap"`
 	FullyDilutedMarketCap string            `json:"fully_diluted_market_cap"`
 	Volume24h             string            `json:"volume_24h"`
-	VolumeByMarketCap     string            `json:"volume_by_market_cap"`
 	CirculatingSupply     string            `json:"circulating_supply"`
 	HighLow24hr           map[string]string `json:"high_low_24hr"`
 	MaxSupply             string            `json:"max_supply"`
@@ -74,12 +73,11 @@ func getCoinDetails(url string) coinDetails {
 		Rank:                  rank,
 		Symbol:                match[0][3],
 		Image:                 match[0][1],
-		Link:                  match[0][13],
+		Link:                  match[0][12],
 		MarketCap:             match[0][8],
 		FullyDilutedMarketCap: match[0][9],
 		Volume24h:             match[0][10],
-		VolumeByMarketCap:     match[0][11],
-		CirculatingSupply:     match[0][12],
+		CirculatingSupply:     match[0][11],
 		HighLow24hr: map[string]string{
 			"high": match[0][7],
 			"low":  match[0][6],
