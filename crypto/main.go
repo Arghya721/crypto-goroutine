@@ -127,6 +127,7 @@ func urlList() []coinDetails {
 type Response events.APIGatewayProxyResponse
 
 func Handler(ctx context.Context) (Response, error) {
+
 	var buf bytes.Buffer
 
 	allCoinDetails := urlList()
@@ -147,8 +148,9 @@ func Handler(ctx context.Context) (Response, error) {
 		IsBase64Encoded: false,
 		Body:            buf.String(),
 		Headers: map[string]string{
-			"Content-Type":           "application/json",
-			"X-MyCompany-Func-Reply": "hello-handler",
+			"Access-Control-Allow-Origin": "*",
+			"Content-Type":                "application/json",
+			"X-MyCompany-Func-Reply":      "hello-handler",
 		},
 	}
 	return resp, nil
