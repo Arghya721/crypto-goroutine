@@ -35,7 +35,6 @@ type coinDetails struct {
 }
 
 func getCoinDetails(url string) coinDetails {
-	//fmt.Println(url)
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		fmt.Println(err)
