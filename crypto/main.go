@@ -137,9 +137,7 @@ func Handler(ctx context.Context) (Response, error) {
 		return allCoinDetails[i].Rank < allCoinDetails[j].Rank
 	})
 
-	body, err := json.Marshal(map[string]interface{}{
-		"Data": allCoinDetails,
-	})
+	body, err := json.Marshal(allCoinDetails)
 	if err != nil {
 		return Response{StatusCode: 404}, err
 	}
